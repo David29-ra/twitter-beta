@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :tweets, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  has_one_attached :avatar
+
   # validations
   validates :email, presence: true
   validates :email, uniqueness: true
