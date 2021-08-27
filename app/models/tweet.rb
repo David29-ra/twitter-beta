@@ -4,7 +4,6 @@ class Tweet < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   # Validations
-  validates :body
   validates :body, presence: true
   validates :body, length: { maximum: 140 }
 end
