@@ -1,6 +1,6 @@
 <section class = "section--sm">
   <div class="container" style="align-items:center;">
-    <div class = "container__h2"><h1>Home</h1></div>
+    <div class="container__sign"><h2>Home</h2></div>
       <div class = "container__sign">
 
         <% if user_signed_in? %>
@@ -26,7 +26,7 @@
         
 
         <% @tweets.reverse_each do |tweet| %>
-          <div class="card t-flex gap-8", style = "gap:16px">
+          <div class="card t-flex gap-8", style = "gap:16px; max-width;100%;">
             <div class = "">
               <% if tweet.user.avatar.attached? %>
                 <%= image_tag(tweet.user.avatar, class: "img-profile") %>
@@ -50,21 +50,29 @@
                   <% end %>
                 </span>
 
-                <div class = "t-flex">
-                  <span class = "m-0-4 content--l"> <%= link_to(image_tag("Vector.svg", :alt => "comment"),tweet_path(tweet) ,class: 'logo' )  %> </span>
-                  <span class = "m-0-4 content--l" >
-                    <%= link_to tweet_path(tweet) do %>
-                      <%= tweet.comments_count %>
-                    <% end %>
-                  </span>
+                <div class="t-flex">
+                  <div class="t-flex">
+                    <span class = "m-0-4 content--l"> <%= link_to(image_tag("Vector.svg", :alt => "comment"),tweet_path(tweet) ,class: 'logo' )  %> </span>
+                    <span class = "m-0-4 content--l" >
+                      <%= link_to tweet_path(tweet) do %>
+                        <%= tweet.comments_count %>
+                      <% end %>
+                    </span>
+                  </div>
+                  
 
-                  <span class = "m-0-4 content--l"> <%= link_to(image_tag("edit.svg", :alt => "edit"),edit_tweet_path(tweet) ,class: 'logo' )  %> </span>
-                  <span class = "m-0-4 content--l"> <%= link_to(image_tag("delete.svg", :alt => "delete"),tweet_path(tweet), method: :delete,class: 'logo' )  %> </span>
+                  <div class="t-flex">
+                    <% if tweet.user == current_user %>
+                      <span class = "m-0-4 content--l"> <%= link_to(image_tag("edit.svg", :alt => "edit"),edit_tweet_path(tweet) ,class: 'logo' )  %> </span>
+                      <span class = "m-0-4 content--l"> <%= link_to(image_tag("delete.svg", :alt => "delete"),tweet_path(tweet), method: :delete,class: 'logo' )  %> </span>
+                    <% end %>
+                  </div>
                 </div>
 
               </div>
             </div>
           </div>
+          <hr>
         <% end %>
       </div>
     </div>

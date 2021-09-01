@@ -1,17 +1,17 @@
 <section class = "section--sm">
   <div class="container" style="align-items:center;"> 
-    <div class="container__sign"><h2>Edit Tweet</h2></div>
-    <div class="container__sign">
+    <div class="container__sign"><h2>Edit Comment</h2>
+    <div>
       <div class="card t-flex", style="gap:16px">
 
         <div style = "width:97%">
-          <%= form_with model: @tweet do |form|%>
+          <%= form_with model: [@tweet, @comment], local: true do |form|%>
             <%= form.text_area :body, style: "width: 100%;" %>
             <%= form.submit "Edit", class: "btnew btnew--primary"%>
           <% end %>
         </div>
 
-      </div>   
+      </div>
     </div>
   </div>
 </section>

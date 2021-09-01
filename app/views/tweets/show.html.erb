@@ -1,6 +1,6 @@
 <section class = "section--sm">
   <div class="container" style="align-items:center;">
-    <div class = "container__h2"><h1>Tweet Detail</h1></div>
+    <div class = "container__sign"><h2>Tweet Detail</h2></div>
 
       <div class = "container__sign">
         <div class="card t-flex gap-8", style = "gap:16px">
@@ -35,8 +35,10 @@
                   <% end %>
                 </span>
 
-                <span class = "m-0-4 content--l"> <%= link_to(image_tag("edit.svg", :alt => "edit"),edit_tweet_path(@tweet) ,class: 'logo' )  %> </span>
-                <span class = "m-0-4 content--l"> <%= link_to(image_tag("delete.svg", :alt => "delete"),tweet_path(@tweet), method: :delete,class: 'logo') %> </span>
+                <% if @tweet.user == current_user %>
+                  <span class = "m-0-4 content--l"> <%= link_to(image_tag("edit.svg", :alt => "edit"),edit_tweet_path(@tweet) ,class: 'logo' )  %> </span>
+                  <span class = "m-0-4 content--l"> <%= link_to(image_tag("delete.svg", :alt => "delete"),tweet_path(@tweet), method: :delete,class: 'logo') %> </span>
+                <% end %>
               </div>
 
             </div>
@@ -93,13 +95,16 @@
                 <span class = "gray-400 content--l">
                   <%= link_to tweet_path(@tweet) do %>
                     <%= comment.body %>
-                    
                   <% end %>
-
                 </span>
-                
-              </div>
               
+              </div>
+              <div class= "t-flex">
+                <% if comment.user == current_user %>
+                  <span class = "m-0-4 content--l"> <%= link_to(image_tag("edit.svg", :alt => "edit"),edit_tweet_comment_path(@tweet, comment) ,class: 'logo' )  %> </span>
+                  <span class = "m-0-4 content--l"> <%= link_to(image_tag("delete.svg", :alt => "delete"),tweet_comment_path(@tweet, comment), method: :delete,class: 'logo') %> </span>
+                <% end %>
+              </div>
             </div>
           </div>
           <hr>
