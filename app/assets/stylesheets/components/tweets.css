@@ -1,0 +1,101 @@
+.linea {
+  border: 2px solid var(--secondary-100);
+  background: var(--secondary-100);
+  width: 328px;
+  height: 34x;
+}
+
+.mt-48 {
+  margin-top: 48px;
+}
+
+.btn-tweet {
+  width: 67px;
+  height: 28px;
+}
+
+.float-right {
+  float: right;
+}
+
+.m-4-8 {
+  margin: 4px 8px;
+}
+
+.box-shadow-xs {
+  box-shadow: var(--shadow-xs);
+}
+
+.border--radius-4 {
+  border-radius: 4px;
+}
+
+.width-312 {
+  width: 312px;
+  height: 96px;
+  border: none;
+}
+
+.text--decoration-none {
+  text-decoration: none;
+}
+
+.mb-16 {
+  margin-bottom: 16px;
+}
+
+.mt-16 {
+  margin-top: 16px;
+}
+
+.mt-10 {
+  margin-top: 9px;
+}
+
+.flex-col-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.flex-row-left {
+  display: flex;
+  flex-direction: row;
+}
+
+.p4-8 {
+  padding: 4px 8px;
+}
+
+.text--transform-cap {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.gap-4 {
+  gap: 4px;
+}
+
+.m-0-4 {
+  margin: 0px 4px;
+}
+/*pruebas*/
+.as {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* align-items: center; */
+}
+
+.img-profile {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}

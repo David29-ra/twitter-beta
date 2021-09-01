@@ -1,26 +1,45 @@
-<h2>Log in</h2>
+<section class="section--sm">
+  <div class="container" style="align-items:center;">
+    <div class="container__sign"><h2>Login</h2></div>
+    <div class="container__sign">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "generic-container" }) do |f| %>
+        
+        <div class="flex gap-16 mb-8">
+          <div class="input">
+            <%= f.label :email, class: "content--xs overline" %>
+            <div class="input__container"> 
+              <%= f.email_field :email, placeholder: "example@mail.com", class: "input__content" %>
+            </div>
+            <% if resource.errors.messages[:email].any? %>
+              <span class="content--sm input__error-message"><%= resource.errors.messages[:email].join(", ")%></span>
+            <% end %>
+          </div>
+        </div>
+        
+        <div class="flex gap-16 mb-8">
+          <div class="input">
+            <%= f.label :password, class: "content--xs overline" %>
+            <div class="input__container">
+              <%= f.password_field :password, placeholder: "******", class: "input__content" %>
+            </div>
+            <% if resource.errors.messages[:password].any? %>
+              <span class="content--sm input__error-message"><%= resource.errors.messages[:password].join(", ")%></span>
+            <% end %>
+            <% if @minimum_password_length %>
+              <span class="content--sm gray-300">(<%= @minimum_password_length %> characters minimum)</span>
+            <% end %>
+          </div>
+        </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+        <%= f.submit "Submit", class: "btnew btnew--primary" %>
+      <% end %>
+      
+      <p>Don’t have an account?</p>
+      <% if devise_mapping.registerable? && controller_name != 'registrations' %>
+        <%= link_to "Sign Up", new_registration_path(resource_name),class: "blue" %><br />
+      <% end %>
+      
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</section>

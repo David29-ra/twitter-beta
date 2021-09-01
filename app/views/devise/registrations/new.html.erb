@@ -1,29 +1,92 @@
-<h2>Sign up</h2>
+<section class="section--sm">
+  <div class="container" style="align-items:center;">
+    <div class="container__sign"><h2>Sign Up</h2></div>
+    <div class="container__sign">                         
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "generic-container" }) do |f| %> 
+        
+        <div class="flex gap-16 mb-8">
+          <div class="input">
+            <%= f.label :email, class: "content--xs overline" %>
+            <div class="input__container">
+              <%= f.email_field :email, placeholder: "example@mail.com", class: "input__content" %>
+            </div>
+              <% if resource.errors.messages[:email].any? %>
+                <span class="content--sm input__error-message"><%= resource.errors.messages[:email].join(", ")%></span>
+              <% end %>
+          </div>
+        </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <div class="flex gap-16 mb-8">
+          <div class="input">
+            <%= f.label :username, class: "content--xs overline" %>
+            <div class="input__container">
+              <%= f.text_field :username, autofocus: true, placeholder: "example", class: "input__content" %>
+            </div>
+              <% if resource.errors.messages[:username].any? %>
+                <span class="content--sm input__error-message"><%= resource.errors.messages[:username].join(", ")%></span>
+              <% end %>
+          </div>
+        </div>
+
+        <div class="flex gap-16 mb-8">
+          <div class="input">
+            <%= f.label :name, class: "content--xs overline" %>
+            <div class="input__container">
+              <%= f.text_field :name, autofocus: true, placeholder: "example", class: "input__content" %>
+            </div>
+              <% if resource.errors.messages[:name].any? %>
+                <span class="content--sm input__error-message"><%= resource.errors.messages[:name].join(", ")%></span>
+              <% end %>
+          </div>
+        </div>
+
+        <div class="flex gap-16 mb-8">
+          <div class="input">
+            <%= f.label :avatar, class:"content--xs overline" %>
+            <div class="input__ava">
+              <%= f.file_field :avatar, class: "input__content" %>
+            </div>
+            <% if resource.errors.messages[:avatar].any? %>
+              <span class="content--sm input__error-message"><%= resource.errors.messages[:avatar].join(", ")%></span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="flex gap-16 mb-8">
+          <div class="input">
+            <%= f.label :password, class: "content--xs overline" %>
+            <div class="input__container">
+              <%= f.password_field :password, placeholder: "******", class: "input__content" %>
+            </div>
+              <% if resource.errors.messages[:password].any? %>
+                <span class="content--sm input__error-message"><%= resource.errors.messages[:password].join(", ")%></span>
+              <% end %>
+              <% if @minimum_password_length %>
+                <span class="content--sm gray-300">(<%= @minimum_password_length %> characters minimum)</span>
+              <% end %>
+          </div>
+        </div>
+
+        <div class="flex gap-16 mb-8">
+          <div class="input">
+            <%= f.label :password_confirmation, class: "content--xs overline" %>
+            <div class="input__container">
+              <%= f.password_field :password_confirmation, placeholder: "******", class: "input__content" %>
+            </div>
+              <% if resource.errors.messages[:password_confirmation].any? %>
+                <span class="content--sm input__error-message"><%= resource.errors.messages[:password_confirmation].join(", ")%></span>
+              <% end %>
+          </div>
+        </div>
+
+        <%= f.submit "Sign up", class: "btnew btnew--primary" %>
+      <% end %>
+
+      <p>Already a member? </p>
+      <%- if controller_name != 'sessions' %>
+        <%= link_to "Sign in", new_session_path(resource_name),class:"blue" %><br />
+      <% end %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</section>

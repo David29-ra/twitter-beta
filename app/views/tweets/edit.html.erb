@@ -1,0 +1,20 @@
+<h1>Edit Tweet</h1>
+
+<div class="card t-flex", style="gap:16px">
+          
+  <div>
+    <% if current_user.avatar.attached? %>
+      <%= image_tag(current_user.avatar, class: "img-profile") %>
+    <% else %>
+      <%= image_tag('Image.svg', class: "img-profile")  %>
+    <% end %>
+  </div>
+
+  <div style = "width:85%">
+    <%= form_with model: @tweet do |form|%>
+      <%= form.text_area :body, style: "width: 95%;" %>
+      <%= form.submit "Edit", class: "btnew btnew--primary", method: :post %>
+    <% end %>
+  </div>
+
+</div>

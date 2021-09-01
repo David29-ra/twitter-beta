@@ -1,40 +1,29 @@
 class CommentsController < ApplicationController
-  # GET /comments
-  def index
-    @comments = Comment.all
-  end
-
-  # GET /comments/:id
-  def show
-    @comment = Comment.find(params[:id])
-  end
-
   # GET /comments/new
   def new
-    @comment = Comment.new
+    @tweet = Tweet.find(params[:tweet_id])
+    @comment = Comment.new(tweet_id: @tweet.id)
   end
 
   # GET /comments/:id/edit
   def edit
+    @tweet = Tweet.find(params[:tweet_id])
     @comment = Comment.find(params[:id])
   end
 
   # POST /comments
   def create
+    @tweet = Tweet.find(params[:tweet_id])
     @comment = Comment.new(comment_params)
-
-    if @comment.save
-      flash[:success] = 'Object successfully created'
-      redirect_to @comment
-    else
-      flash[:error] = 'Something went wrong'
-      render :new
-    end
+    @comment.user = current_user
+    @comment.save
+    redirect_to @tweet
   end
 
   # PATCH /comments/:id
   def update
     @comment = Comment.find(params[:id])
+    @comment.user = current_user
 
     if @comment.update(comment_params)
       flash[:success] = 'comment was successfully updated'
@@ -60,6 +49,6 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:body)
+    params.permit(:body, :tweet_id)
   end
 end

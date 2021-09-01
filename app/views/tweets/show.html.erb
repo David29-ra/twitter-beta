@@ -1,0 +1,110 @@
+<section class = "section--sm">
+  <div class="container" style="align-items:center;">
+    <div class = "container__h2"><h1>Tweet Detail</h1></div>
+
+      <div class = "container__sign">
+        <div class="card t-flex gap-8", style = "gap:16px">
+          <div class = "">
+            <% if @tweet.user.avatar.attached? %>
+              <%= image_tag(@tweet.user.avatar, class: "img-profile") %>
+            <% else %>
+              <%= image_tag('Image.svg', class: "img-profile")  %>
+            <% end %>
+          </div>
+
+          <div class = "">
+            <div class = "t-flex gap-16">
+              <span class = "content--l text--transform-cap gray-400 "><%= @tweet.user.name %></span>
+              <span class = "link"><%= "@#{@tweet.user.username}" %></span>
+              <span class = "content--sm gray-300"><%= @tweet.created_at.strftime("%B %d")%></span>
+            </div>
+
+            <div class = "t-flex t-column left">
+
+              <span class = "gray-400 content--l">
+                <%= link_to tweet_path(@tweet) do %>
+                  <%= @tweet.body %>
+                <% end %>
+              </span>
+
+              <div class = "t-flex">
+                <span class = "m-0-4 content--l"> <%= link_to(image_tag("Vector.svg", :alt => "comment"),tweet_path(@tweet) ,class: 'logo' )  %> </span>
+                <span class = "m-0-4 content--l" >
+                  <%= link_to tweet_path(@tweet) do %>
+                    <%= @tweet.comments_count %>
+                  <% end %>
+                </span>
+
+                <span class = "m-0-4 content--l"> <%= link_to(image_tag("edit.svg", :alt => "edit"),edit_tweet_path(@tweet) ,class: 'logo' )  %> </span>
+                <span class = "m-0-4 content--l"> <%= link_to(image_tag("delete.svg", :alt => "delete"),tweet_path(@tweet), method: :delete,class: 'logo') %> </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class = "container__sign">
+
+        <% if user_signed_in? %>
+          <div class="card t-flex", style="gap:16px">
+          
+            <div>
+              <% if current_user.avatar.attached? %>
+                <%= image_tag(current_user.avatar, class: "img-profile") %>
+              <% else %>
+                <%= image_tag('Image.svg', class: "img-profile")  %>
+              <% end %>
+            </div>
+
+            <div style = "width:85%">
+              <%= form_with url: "/tweets/#{@tweet.id}/comments", method: :post do |form|%>
+                <%= form.text_area :body, placeholder: "Remember to thing before write.", style: "width: 95%;" %>
+                <%= form.submit "Comment", class: "btnew btnew--primary", method: :post %>
+              <% end %>
+            </div>
+
+          </div>
+        <% end %>
+        
+        
+
+        <% @tweet.comments.reverse_each do |comment| %>
+          
+          <div class="card t-flex gap-8" style = "gap: 16px">
+            
+            <div class = "">
+              <% if comment.user.avatar.attached? %>
+                <%= image_tag(comment.user.avatar, class: "img-profile") %>
+              <% else %>
+                <%= image_tag('Image.svg', class: "img-profile")  %>
+              <% end %>
+            </div>
+
+            <div class = "">
+              <div class = "t-flex gap-16">
+                <span class = "content--l text--transform-cap gray-400 "><%= comment.user.name %></span>
+                <span class = "link"><%= "@#{comment.user.username}" %></span>
+                <span class = "content--sm gray-300"><%= comment.created_at.strftime("%B %d")%></span>
+              </div>
+
+              <div class = "t-flex t-column left">
+
+                <span class = "gray-400 content--l">
+                  <%= link_to tweet_path(@tweet) do %>
+                    <%= comment.body %>
+                    
+                  <% end %>
+
+                </span>
+                
+              </div>
+              
+            </div>
+          </div>
+          <hr>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,42 @@
+.cta {
+  text-align: center;
+}
+
+.cta__title {
+  margin-bottom: 24px;
+}
+
+.cta__title--overline {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.cta__text {
+  max-width: 768px;
+  margin: auto;
+  margin-bottom: 16px;
+}
+
+.cta__button-group {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.cta__container--horizontal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cta__text-container {
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  text-align: left;
+}

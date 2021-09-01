@@ -22,19 +22,20 @@ class TweetsController < ApplicationController
   # POST /tweets
   def create
     @tweet = Tweet.new(tweet_params)
+    @tweet.user = current_user
 
     if @tweet.save
       flash[:success] = 'Object successfully created'
-      redirect_to @tweet
     else
       flash[:error] = 'Something went wrong'
-      render :new
     end
+    redirect_to root_path
   end
 
   # PATCH /tweets/:id
   def update
     @tweet = Tweet.find(params[:id])
+    @tweet.user = current_user
 
     if @tweet.update(tweet_params)
       flash[:success] = 'Tweet was successfully updated'

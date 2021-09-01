@@ -10,9 +10,26 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    
+    <header class = "navbar align-center">
+      <%= link_to(image_tag("tweet.svg", :alt => "logo"), root_path, class: "logo" ) %>
+      <div class = "navbar__left">
+        <% if user_signed_in? %>
+          <%= link_to 'Edit Profile', edit_user_registration_path, class: "btnew btnew--secondary" %></li>
+          <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "btnew btnew--secondary" %>
+        <% else %>
+          <%= link_to 'Login', new_user_session_path, class: "btnew btnew--secondary" %>
+        <% end %>
+      </div>
+    </header>
+
     <%= yield %>
+    
+    <footer>
+      <p class="content--sm ">© 2021 - Codeable Tweetable</p>
+      <p class="content--sm ">Build with ♥ by</p>
+      <ul class="student-list">
+        <li class="content--xs">David Rivas</li>
+      </ul>
+    </footer>
   </body>
 </html>

@@ -1,43 +1,107 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<section class="section--sm">
+  <div class="container" style="align-items:center;">
+    <div class="container__sign"><h2>Edit Profile</h2></div>
+    <div class="container__sign">
+    
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "generic-container" }) do |f| %>
+        
+        <div class="flex gap-16 mb-8">
+          <div class="input">
+            <%= f.label :email, class: "content--xs overline" %>
+            <div class="input__container">
+              <%= f.email_field :email, placeholder: "example@mail.com", class: "input__content" %>
+            </div>     
+            <% if resource.errors.messages[:email].any? %>
+              <span class="content--sm input__error-message"><%= resource.errors.messages[:email].join(", ")%></span>
+            <% end %>
+          </div>
+        </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="flex gap-16 mb-8">
+          <div class="input">
+            <%= f.label :username, class: "content--xs overline" %>
+            <div class="input__container">
+              <%= f.text_field :username, placeholder: "example", class: "input__content" %>
+            </div>
+            <% if resource.errors.messages[:username].any? %>
+              <span class="content--sm input__error-message"><%= resource.errors.messages[:username].join(", ")%></span>
+            <% end %>
+          </div>
+        </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <div class="flex gap-16 mb-8">
+          <div class="input">
+            <%= f.label :name, class: "content--xs overline" %>
+            <div class="input__container">
+              <%= f.text_field :name, placeholder: "example", class: "input__content" %>
+            </div>
+            <% if resource.errors.messages[:name].any? %>
+              <span class="content--sm input__error-message"><%= resource.errors.messages[:name].join(", ")%></span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="flex gap-16 mb-8">
+          <div class="input">
+            <%= f.label :avatar, class:"content--xs overline"%>
+            <div>
+              <%= f.file_field :avatar, class: "input__content" %>
+            </div>
+            <% if resource.errors.messages[:avatar].any? %>
+              <span class="content--sm input__error-message"><%= resource.errors.messages[:avatar].join(", ")%></span>
+            <% end %>
+          </div>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <div class="flex gap-16 mb-8">
+          <div class="input">
+            <%= f.label :password, class: "content--xs overline" %>
+            <div class="input__container">
+              <%= f.password_field :password, placeholder: "******", class: "input__content" %>
+            </div>
+            <% if resource.errors.messages[:password].any? %>
+              <span class="content--sm input__error-message"><%= resource.errors.messages[:password].join(", ")%></span>
+            <% end %>
+            <% if @minimum_password_length %>
+              <span class="content--sm gray-300">(<%= @minimum_password_length %> characters minimum) </span>
+            <% end %>
+            <span class="content--sm gray-300"><i>(leave blank if you don't want to change it)</i></span>
+          </div>
+        </div>
+
+        <div class="flex gap-16 mb-8">
+          <div class="input">
+            <%= f.label :password_confirmation, class: "content--xs overline" %>
+            <div class="input__container">
+              <%= f.password_field :password_confirmation, placeholder: "******", class: "input__content" %>
+            </div>
+            <% if resource.errors.messages[:password_confirmation].any? %>
+              <span class="content--sm input__error-message"><%= resource.errors.messages[:password_confirmation].join(", ")%></span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="flex gap-16 mb-8">
+          <div class="input">
+            <%= f.label :current_password, class: "content--xs overline" %>
+            <div class="input__container">
+              <%= f.password_field :current_password, placeholder: "******", class: "input__content" %>
+            </div>
+            <% if resource.errors.messages[:current_password].any? %>
+              <span class="content--sm input__error-message"><%= resource.errors.messages[:current_password].join(", ")%></span>
+            <% end %>
+            <span><i class="content--sm gray-300">(to confirm your changes)</i></span>
+          </div>
+        </div>
+        
+        <%= f.submit "Update", class: "btnew btnew--primary btn--fit-content" %>
+      <% end %>
+
+      <%= link_to "Back", root_path ,class: "blue"%>
+    </div>
   </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</section>
